@@ -1,0 +1,20 @@
+
+versiion: 2
+jobs:
+    build:
+        working_directorry: ~
+        docker:
+            - image: circleci/python
+        steps:
+            - checkout
+            - run:
+                name: coding style check
+                command: |
+                    sudo pip3 install flake8
+                    flake8 . --ignore=E402
+            - run:
+                name: run pytest
+                command: |
+                    sudo pip install pytest
+                    sudo pip install --quiet -r requirements.txt
+                    pytest
